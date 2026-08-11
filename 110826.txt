@@ -1,0 +1,171 @@
+SQL> create table course1(
+  2  course_name Varchar2(9),
+  3  courseid Number(9));
+
+Table created.
+
+SQL> create table student9(
+  2  student_name Varchar2(25),
+  3  student_regno Varchar2(10),
+  4  student_courseid Number(9),
+  5  student_age Number(2),
+  6  student_gender Char(5),
+  7  student_email Varchar(30));
+
+Table created.
+
+SQL> alter table course1 modify courseid NUmber(9)Primary Key;
+
+Table altered.
+
+SQL> alter table student9 modify(
+  2  student_regno Varchar2(10)Primary Key,
+  3  student_name Varchar2(25)Not Null,
+  4  student_age Number(2)Check(student_age>=18),
+  5  student_courseid Number(9)References course1(courseid),
+  6  student_email Varchar2(30)Unique,
+  7  student_gender Char(5)default'M');
+
+Table altered.
+
+SQL> insert into course1 values('ece',9762);
+
+1 row created.
+
+SQL> insert into student9 values('ramesh','11249a062',2345,20,'M','112149a0262@gmail.com');
+insert into student9 values('ramesh','11249a062',2345,20,'M','112149a0262@gmail.com')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (A062.SYS_C0031714) violated - parent key not 
+found 
+
+
+SQL> 
+SQL> insert into student9 values('ramesh','11249a062',9762,20,'M','112149a0262@gmail.com');
+
+1 row created.
+
+SQL> select*from student9;
+
+STUDENT_NAME              STUDENT_RE STUDENT_COURSEID STUDENT_AGE STUDE         
+------------------------- ---------- ---------------- ----------- -----         
+STUDENT_EMAIL                                                                   
+------------------------------                                                  
+ramesh                    11249a062              9762          20 M             
+112149a0262@gmail.com                                                           
+                                                                                
+
+SQL> 
+SQL> insert into student9 values('raju','11249a045',9762,20,'M','112149a02345@gmail.com');
+
+1 row created.
+
+SQL> 
+SQL> insert into student9 values('raju','11249a045',9762,20,'M','112149a02345@gmail.com');
+insert into student9 values('raju','11249a045',9762,20,'M','112149a02345@gmail.com')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (A062.SYS_C0031711) violated 
+
+
+SQL> insert into student9 values('rajesh','11249a025',9762,20,'M','112149a045@gmail.com');
+
+1 row created.
+
+SQL> insert into student9 values('kamesh','11249a032',9762,20,'M','112149b34045@gmail.com');
+
+1 row created.
+
+SQL> insert into student9 values('kamma','11249a012',9762,20,'M','11214945@gmail.com');
+
+1 row created.
+
+SQL> insert into student9 values('kajesha','11249a022',9762,20,'M','112149@gmail.com');
+
+1 row created.
+
+SQL> insert into student9 values('sudheerr','11249a066',9762,20,'M','112123@gmail.com');
+
+1 row created.
+
+SQL> insert into student9 values('tharish','11249a076',9762,20,'M','1121@gmail.com');
+
+1 row created.
+
+SQL> insert into student9 values('cvamsi','11249a096',9762,20,'M','113@gmail.com');
+
+1 row created.
+
+SQL> insert into student9 values('chandu','11249a093',9762,20,'M','13@gmail.com');
+
+1 row created.
+
+SQL> insert into student9 values('hemesh','11249a3493',9762,20,'M','147583@gmail.com');
+
+1 row created.
+
+SQL> insert into student9 values('vishnu','112492423',9762,20,'M','wkj583@gmail.com');
+
+1 row created.
+
+SQL> select*from student9;
+
+STUDENT_NAME              STUDENT_RE STUDENT_COURSEID STUDENT_AGE STUDE         
+------------------------- ---------- ---------------- ----------- -----         
+STUDENT_EMAIL                                                                   
+------------------------------                                                  
+ramesh                    11249a062              9762          20 M             
+112149a0262@gmail.com                                                           
+                                                                                
+raju                      11249a045              9762          20 M             
+112149a02345@gmail.com                                                          
+                                                                                
+rajesh                    11249a025              9762          20 M             
+112149a045@gmail.com                                                            
+                                                                                
+
+STUDENT_NAME              STUDENT_RE STUDENT_COURSEID STUDENT_AGE STUDE         
+------------------------- ---------- ---------------- ----------- -----         
+STUDENT_EMAIL                                                                   
+------------------------------                                                  
+kamesh                    11249a032              9762          20 M             
+112149b34045@gmail.com                                                          
+                                                                                
+kamma                     11249a012              9762          20 M             
+11214945@gmail.com                                                              
+                                                                                
+kajesha                   11249a022              9762          20 M             
+112149@gmail.com                                                                
+                                                                                
+
+STUDENT_NAME              STUDENT_RE STUDENT_COURSEID STUDENT_AGE STUDE         
+------------------------- ---------- ---------------- ----------- -----         
+STUDENT_EMAIL                                                                   
+------------------------------                                                  
+sudheerr                  11249a066              9762          20 M             
+112123@gmail.com                                                                
+                                                                                
+tharish                   11249a076              9762          20 M             
+1121@gmail.com                                                                  
+                                                                                
+cvamsi                    11249a096              9762          20 M             
+113@gmail.com                                                                   
+                                                                                
+
+STUDENT_NAME              STUDENT_RE STUDENT_COURSEID STUDENT_AGE STUDE         
+------------------------- ---------- ---------------- ----------- -----         
+STUDENT_EMAIL                                                                   
+------------------------------                                                  
+chandu                    11249a093              9762          20 M             
+13@gmail.com                                                                    
+                                                                                
+hemesh                    11249a3493             9762          20 M             
+147583@gmail.com                                                                
+                                                                                
+vishnu                    112492423              9762          20 M             
+wkj583@gmail.com                                                                
+                                                                                
+
+12 rows selected.
+
+SQL> spool off

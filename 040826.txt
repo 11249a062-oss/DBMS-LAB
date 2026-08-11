@@ -1,0 +1,147 @@
+SQL> create table course(
+  2  course_id Number(2)Primary Key,
+  3  course_name Varchar2(20)Not Null
+  4  );
+
+Table created.
+
+SQL> create table student(
+  2  student_regno Varchar2(10)Primary Key,
+  3  student_name Varchar2(20)Not Null,
+  4  student_course_id Number(2)References course
+  5  (course_id),
+  6  student_age Number(2)Check (student_age>=18),
+  7  student_mail Varchar2(50)Unique,
+  8  student_gender Char(2)Default'M'
+  9  );
+
+Table created.
+
+SQL> INSERT INTO COURSE VALUES(01,'CSE');
+
+1 row created.
+
+SQL> INSERT INTO COURSE VALUES(01,'CSE');
+INSERT INTO COURSE VALUES(01,'CSE')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (A062.SYS_C0029425) violated 
+
+
+SQL> 
+SQL> INSERT INTO COURSE VALUES(023,'ECE');
+
+1 row created.
+
+SQL> INSERT INTO COURSE VALUES(021,'MECH');
+
+1 row created.
+
+SQL> INSERT INTO STUDENT VALUES('11249A062','JANAKIRAM',17,'JANAIKIRAM@GMAIL.COM');
+INSERT INTO STUDENT VALUES('11249A062','JANAKIRAM',17,'JANAIKIRAM@GMAIL.COM')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> INSERT INTO STUDENT VALUES('11249A062','JANAKIRAM',17,'JANAIKIRAM@GMAIL.COM');
+INSERT INTO STUDENT VALUES('11249A062','JANAKIRAM',17,'JANAIKIRAM@GMAIL.COM')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> INSERT INTO STUDENT VALUES('11249A062','JANAKIRAM',17,'JANAIKIRAM@GMAIL.COM','M');
+INSERT INTO STUDENT VALUES('11249A062','JANAKIRAM',17,'JANAIKIRAM@GMAIL.COM','M')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> INSERT INTO STUDENT VALUES('11249A062','JANAKIRAM',18,'JANAIKIRAM@GMAIL.COM','M');
+INSERT INTO STUDENT VALUES('11249A062','JANAKIRAM',18,'JANAIKIRAM@GMAIL.COM','M')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> INSERT INTO STUDENT VALUES('11249A062',01,'JANAKIRAM',18,'JANAIKIRAM@GMAIL.COM','M');
+INSERT INTO STUDENT VALUES('11249A062',01,'JANAKIRAM',18,'JANAIKIRAM@GMAIL.COM','M')
+                                          *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> 
+SQL> INSERT INTO STUDENT VALUES('11249A062','JANAKIRAM',01,18,'JANAIKIRAM@GMAIL.COM','M');
+
+1 row created.
+
+SQL> INSERT STUDENT VALUES)('11249A023','THARISH',023,19,'THARISH@GMAIL.COM','M');
+INSERT STUDENT VALUES)('11249A023','THARISH',023,19,'THARISH@GMAIL.COM','M')
+       *
+ERROR at line 1:
+ORA-00925: missing INTO keyword 
+
+
+SQL> INSERT INTO STUDENT VALUES)('11249A023','THARISH',023,19,'THARISH@GMAIL.COM','M');
+INSERT INTO STUDENT VALUES)('11249A023','THARISH',023,19,'THARISH@GMAIL.COM','M')
+                          *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> 
+SQL> INSERT INTO STUDENT VALUES('11249A023','THARISH',023,19,'THARISH@GMAIL.COM','M');
+
+1 row created.
+
+SQL> INSERT INTO STUDENT VALUES('11249A022','SUDHEER',021,23,'SUDHEER@GMAIL.COM','M');
+
+1 row created.
+
+SQL> select*from student;
+
+STUDENT_RE STUDENT_NAME         STUDENT_COURSE_ID STUDENT_AGE                   
+---------- -------------------- ----------------- -----------                   
+STUDENT_MAIL                                       ST                           
+-------------------------------------------------- --                           
+11249A062  JANAKIRAM                            1          18                   
+JANAIKIRAM@GMAIL.COM                               M                            
+                                                                                
+11249A023  THARISH                             23          19                   
+THARISH@GMAIL.COM                                  M                            
+                                                                                
+11249A022  SUDHEER                             21          23                   
+SUDHEER@GMAIL.COM                                  M                            
+                                                                                
+
+SQL> INSERT INTO STUDENT VALUES('11249A043','RAMESH',01,22,'RAMESH@GMAIL.COM','M');
+
+1 row created.
+
+SQL> select*from student;
+
+STUDENT_RE STUDENT_NAME         STUDENT_COURSE_ID STUDENT_AGE                   
+---------- -------------------- ----------------- -----------                   
+STUDENT_MAIL                                       ST                           
+-------------------------------------------------- --                           
+11249A062  JANAKIRAM                            1          18                   
+JANAIKIRAM@GMAIL.COM                               M                            
+                                                                                
+11249A023  THARISH                             23          19                   
+THARISH@GMAIL.COM                                  M                            
+                                                                                
+11249A022  SUDHEER                             21          23                   
+SUDHEER@GMAIL.COM                                  M                            
+                                                                                
+
+STUDENT_RE STUDENT_NAME         STUDENT_COURSE_ID STUDENT_AGE                   
+---------- -------------------- ----------------- -----------                   
+STUDENT_MAIL                                       ST                           
+-------------------------------------------------- --                           
+11249A043  RAMESH                               1          22                   
+RAMESH@GMAIL.COM                                   M                            
+                                                                                
+
+SQL> spool off;

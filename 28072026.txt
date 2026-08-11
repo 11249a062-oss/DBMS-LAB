@@ -1,0 +1,7 @@
+SQL> select*from patient;
+
+PNAME                       PNO     BILLNO                                      
+-------------------- ---------- ----------                                      
+chandu                    23435    3987200                                      
+
+SQL> spool off
