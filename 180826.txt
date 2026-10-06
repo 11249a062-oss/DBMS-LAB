@@ -1,0 +1,78 @@
+SQL> select student_name,student_regno,student_courseid from student9,course1;
+
+STUDENT_NAME              STUDENT_RE STUDENT_COURSEID                           
+------------------------- ---------- ----------------                           
+ramesh                    11249a062              9762                           
+raju                      11249a045              9762                           
+rajesh                    11249a025              9762                           
+kamesh                    11249a032              9762                           
+kamma                     11249a012              9762                           
+kajesha                   11249a022              9762                           
+sudheerr                  11249a066              9762                           
+tharish                   11249a076              9762                           
+cvamsi                    11249a096              9762                           
+hemesh                    11249a3493             9762                           
+vishnu                    112492423              9762                           
+
+11 rows selected.
+
+SQL> alter table student9 rename column student_courseid to courseid;
+
+Table altered.
+
+SQL> select student_name,student_regno,course1.courseid from student9,course1;
+
+STUDENT_NAME              STUDENT_RE   COURSEID                                 
+------------------------- ---------- ----------                                 
+ramesh                    11249a062        9762                                 
+raju                      11249a045        9762                                 
+rajesh                    11249a025        9762                                 
+kamesh                    11249a032        9762                                 
+kamma                     11249a012        9762                                 
+kajesha                   11249a022        9762                                 
+sudheerr                  11249a066        9762                                 
+tharish                   11249a076        9762                                 
+cvamsi                    11249a096        9762                                 
+hemesh                    11249a3493       9762                                 
+vishnu                    112492423        9762                                 
+
+11 rows selected.
+
+SQL> select student_name,student_regno,student9.courseid,student_age,course_name,course1.courseid from studen9,course1 where student9.courseid=course1.courseid;
+select student_name,student_regno,student9.courseid,student_age,course_name,course1.courseid from studen9,course1 where student9.courseid=course1.courseid
+                                                                                                  *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select student_name,student_regno,student9.courseid,student_age,course_name,course1.courseid from student9,course1 where student9.courseid=course1.courseid;
+
+STUDENT_NAME              STUDENT_RE   COURSEID STUDENT_AGE COURSE_NA   COURSEID
+------------------------- ---------- ---------- ----------- --------- ----------
+ramesh                    11249a062        9762          20 ece             9762
+raju                      11249a045        9762          20 ece             9762
+rajesh                    11249a025        9762          20 ece             9762
+kamesh                    11249a032        9762          20 ece             9762
+kamma                     11249a012        9762          20 ece             9762
+kajesha                   11249a022        9762          20 ece             9762
+sudheerr                  11249a066        9762          20 ece             9762
+tharish                   11249a076        9762          20 ece             9762
+cvamsi                    11249a096        9762          20 ece             9762
+hemesh                    11249a3493       9762          20 ece             9762
+vishnu                    112492423        9762          20 ece             9762
+
+11 rows selected.
+
+SQL> commit
+  2  commit;
+commit
+*
+ERROR at line 2:
+ORA-02185: a token other than WORK follows COMMIT 
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off

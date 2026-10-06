@@ -1,0 +1,94 @@
+SQL> create table student8
+  2  (
+  3  student_id NUMBER(5) PRIMARY KEY,
+  4  STUDENT_NAME VARCHAR2(30),
+  5  MARKS NUMBER(3)
+  6  );
+create table student8
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> create table student98
+  2  (
+  3  student_id NUMBER(5) PRIMARY KEY,
+  4  STUDENT_NAME VARCHAR2(30),
+  5  MARKS NUMBER(3)
+  6  );
+
+Table created.
+
+SQL> 
+SQL> INSERT INTO STUDENT VALUES(101,'ARUN',85);
+INSERT INTO STUDENT VALUES(101,'ARUN',85)
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> INSERT INTO STUDENT VALUES(102,'BALA',72);
+INSERT INTO STUDENT VALUES(102,'BALA',72)
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> INSERT INTO STUDENT VALUES(103,'DIVYA',91);
+INSERT INTO STUDENT VALUES(103,'DIVYA',91)
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> INSERT INTO STUDENT98 VALUES(101,'ARUN',85);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT98 VALUES(102,'BALA',72);
+
+1 row created.
+
+SQL> INSERT INTO STUDENT98 VALUES(103,'DIVYA',91);
+
+1 row created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> CREATE OR REPLACE PROCEDURE GET_STUDENT98
+  2  (
+  3  P_ID IN NUMBER
+  4  )
+  5  IS
+  6  V_NAME STUDENT_NAME,MARKS
+  7  INTO V_NAME,V_MARKS
+  8  FROM STUDENT98
+  9  WHERE STUDENT_ID=P_ID;
+ 10  
+ 11  
+ 12  DBMS_OUTPUT.PUT_LINE('Student Name:'||V_NAME);
+ 13  DBMS_OUTPUT.PUT_LINE('Marks       :'||v_MARKS);
+ 14  EXCEPTION
+ 15  WHEN NO_DATA_FOUND THEN
+ 16  DBMS_OUTPUT.PUT_LINE('Student record Not Found.');
+ 17  END;
+ 18  /
+
+Warning: Procedure created with compilation errors.
+
+SQL> 
+SQL> SET SERVEROUT ON;
+SQL> EXEC GET_STUDENT(101);
+BEGIN GET_STUDENT(101); END;
+
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7: 
+PLS-00201: identifier 'GET_STUDENT' must be declared 
+ORA-06550: line 1, column 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> SPOOL OFF;
